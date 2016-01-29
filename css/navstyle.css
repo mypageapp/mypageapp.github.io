@@ -1,0 +1,31 @@
+/* copyright @flashblu*/
+a.selected {
+	color: black !important;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 6px 0;
+	overflow: hidden;
+}
+
+nav ul li {
+	float: right;
+}
+
+nav a:link, nav a:visited {
+	display: block;
+	width: 120px;
+	font-family: sans-serif;
+	font-weight: bold;	
+	color: CornflowerBlue;
+	text-align: center;
+	padding: 4px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+nav a:hover, nav a:active {
+	background-color: Gainsboro;
+}
