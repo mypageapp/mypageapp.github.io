@@ -1,0 +1,49 @@
+<!-- copyright @flashblu -->
+<html>
+
+<div id="auth" style="text-align:right"><a href='https://account.app.net/oauth/authenticate?client_id=AtXAG5Sfw7TU6vsApfbT9ZWSZ4cY5fz6&response_type=token&redirect_uri=https://mypageapp.github.io/me.htm?scope=basic' class='adn-button' data-type='authorize_v2' data-width="145" data-height="22" >Authorize with App.net</a></div><script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>
+
+<div style="text-align:right" id="avatar"></div>
+<div style="text-align:left" id="username"></div>
+<div style="text-align:left" id="name"></div>
+<div style="text-align:left" id="site"></div>
+
+<script>
+
+function logOut() {	
+    window.location = window.location.href.substr(0, window.location.href.indexOf('?'));
+}
+
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4) {
+    	data = JSON.parse(xmlhttp.responseText);
+        document.getElementById("username").innerHTML = "<a href='https://alpha.app.net/" + data.data.username + "'>@" + data.data.username + "</a>";
+        document.getElementById("name").innerHTML = data.data.name;
+        document.getElementById("site").innerHTML = "<a href='http://" + data.data.verified_domain + "' target='_blank'>" + data.data.verified_domain + "</a>";
+    }
+}
+
+xmlhttp.open("GET","https://api.app.net/users/me?access_token=" + window.location.href.substring( window.location.href.lastIndexOf( '=' )+1, window.location.href.length )+ "&include_user_annotations=1",true);
+
+
+if(window.location.href.lastIndexOf( '=' )!=-1) // have no access token at this point
+{
+    xmlhttp.send();
+}
+
+var elem = document.createElement("img");
+document.getElementById("avatar").appendChild(elem);
+var accTok = window.location.href.substring( window.location.href.lastIndexOf( '=' )+1, window.location.href.length);
+if(window.location.href.lastIndexOf( '=' )!=-1) // have no access token at this point
+{    
+    elem.src = 'https://api.app.net/users/me/avatar?access_token=' +  accTok;
+    elem.align = 'left';
+    elem.height = '200';
+    elem.width = '200';
+    document.getElementById("auth").innerHTML = '<button onclick="logOut()">Log out</button>';
+}
+
+</script>
+
+</html>
