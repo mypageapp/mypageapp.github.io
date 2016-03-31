@@ -7,7 +7,8 @@
 <div style="text-align:left" id="username"></div>
 <div style="text-align:left" id="name"></div>
 <div style="text-align:left" id="site"></div>
-
+<br>
+<div style="text-align:left" id="bio"></div>
 <script>
 
 function logOut() {	
@@ -21,6 +22,8 @@ xmlhttp.onreadystatechange = function() {
         document.getElementById("username").innerHTML = "<a href='https://alpha.app.net/" + data.data.username + "'>@" + data.data.username + "</a>";
         document.getElementById("name").innerHTML = data.data.name;
         document.getElementById("site").innerHTML = "<a href='http://" + data.data.verified_domain + "' target='_blank'>" + data.data.verified_domain + "</a>";
+        document.getElementById("bio").innerHTML = data.data.description.text;
+
     }
 }
 
